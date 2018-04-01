@@ -1,6 +1,7 @@
 import argparse
 import time
 from enum import Enum
+import visdom
 
 import numpy as np
 
@@ -22,6 +23,20 @@ class BackyardFlyer(Drone):
 
     def __init__(self, connection):
         super().__init__(connection)
+
+        # default opens up to http://localhost:8097
+        self.v = visdom.Visdom()
+        assert self.v.check_connection()
+
+        # Plot NE
+        ne = np.array([self.local_position[0], self.local_position[1]]).reshape(1, -1)
+        self.ne_plot = self.v.scatter(ne, opts=dict(title="Local position (north, east)", xlabel='North', ylabel='East'))
+
+        # Plot D
+        d = np.array([self.local_position[2]])
+        self.t = 0
+        self.d_plot = self.v.line(d, X=np.array([self.t]), opts=dict(title="Altitude (meters)", xlabel='Timestep', ylabel='Down'))
+
         self.target_position = np.array([0.0, 0.0, 0.0])
         self.all_waypoints = []
         self.in_mission = True
@@ -32,6 +47,8 @@ class BackyardFlyer(Drone):
 
         # TODO: Register all your callbacks here
         self.register_callback(MsgID.LOCAL_POSITION, self.local_position_callback)
+        self.register_callback(MsgID.LOCAL_POSITION, self.update_ne_plot)
+        self.register_callback(MsgID.LOCAL_POSITION, self.update_d_plot)
         self.register_callback(MsgID.LOCAL_VELOCITY, self.velocity_callback)
         self.register_callback(MsgID.STATE, self.state_callback)
 
@@ -47,11 +64,11 @@ class BackyardFlyer(Drone):
         		self.waypoint_transition()
 
         elif self.flight_state == States.WAYPOINT:
-        	if np.linalg.norm(self.target_position[0:2] - self.local_position[0:2]) < 0.1:
+        	if np.linalg.norm(self.target_position[0:2] - self.local_position[0:2]) < 1.0:
         		if len(self.all_waypoints) > 0:
         			self.waypoint_transition()
         		else:
-        			if np.linalg.norm(self.local_velocity[0:2]) < 0.1:
+        			if np.linalg.norm(self.local_velocity[0:2]) < 1.0:
         				self.landing_transition()
 
     def velocity_callback(self):
@@ -81,6 +98,16 @@ class BackyardFlyer(Drone):
         elif self.flight_state == States.DISARMING:
         	if ~self.armed and ~self.guided:
         		self.manual_transition()
+
+    def update_ne_plot(self):
+        ne = np.array([self.local_position[0], self.local_position[1]]).reshape(1, -1)
+        self.v.scatter(ne, win=self.ne_plot, update='append')
+
+    def update_d_plot(self):
+        d = np.array([self.local_position[2]])
+        # update timestep
+        self.t += 1
+        self.v.line(d, X=np.array([self.t]), win=self.d_plot, update='append')
 
     def calculate_box(self):
         """TODO: Fill out this method
