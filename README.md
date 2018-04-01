@@ -19,7 +19,7 @@ You can find my submission [here](https://github.com/agoila/udacity-fcnd-P1/blob
 ## Visualize Drone Trajectory
 Thanks to user [@fierval](https://github.com/fierval/fcnd/blob/master/backyard_flyer/Trajectory%20Visualization.ipynb) for the drone trajectory visualization code. Here's the trajectory for my drone run:
 
-![Drone Trajectory](https://github.com/agoila/udacity-fcnd-P1/tree/master/images "Trajectory")
+![Drone Trajectory](https://github.com/agoila/udacity-fcnd-P1/blob/master/images/drone_trajectory.PNG "Trajectory")
 
 
 
