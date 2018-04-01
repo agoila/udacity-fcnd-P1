@@ -7,7 +7,7 @@ The python code you write is similar to how the drone would be controlled from a
 Follow the steps mentioned [here](https://github.com/agoila/udacity-fcnd-P1/blob/master/Project%20Instructions.md) to get started.
 
 ## Visdom integration
-Look at [this link](https://udacity.github.io/udacidrone/docs/visdom-tutorial.html) to integrate and plot realtime data using Visdom. 
+[This link](https://udacity.github.io/udacidrone/docs/visdom-tutorial.html) provides a great introduction to Facebook's Visdom tool to integrate and plot realtime data for this project. 
 
 Here's a plot of the data acquired after executing the code in `backyard_flyer.py`.
 
@@ -17,7 +17,7 @@ Here's a plot of the data acquired after executing the code in `backyard_flyer.p
 You can find my submission [here](https://github.com/agoila/udacity-fcnd-P1/blob/master/backyard_flyer.py).
 
 ## Visualize Drone Trajectory
-Thanks to user [@fierval](https://github.com/fierval/fcnd/blob/master/backyard_flyer/Trajectory%20Visualization.ipynb) for the drone trajectory visualization code. Here's the trajectory for my drone run:
+Thanks to user [@fierval](https://github.com/fierval/fcnd/blob/master/backyard_flyer/Trajectory%20Visualization.ipynb) for the drone trajectory visualization code. Here's the square trajectory for my drone run:
 
 ![Drone Trajectory](https://github.com/agoila/udacity-fcnd-P1/blob/master/images/drone_trajectory.PNG "Trajectory")
 
