@@ -64,11 +64,11 @@ class BackyardFlyer(Drone):
         		self.waypoint_transition()
 
         elif self.flight_state == States.WAYPOINT:
-        	if np.linalg.norm(self.target_position[0:2] - self.local_position[0:2]) < 1.0:
+        	if np.linalg.norm(self.target_position[0:2] - self.local_position[0:2]) < 0.1:
         		if len(self.all_waypoints) > 0:
         			self.waypoint_transition()
         		else:
-        			if np.linalg.norm(self.local_velocity[0:2]) < 1.0:
+        			if np.linalg.norm(self.local_velocity[0:2]) < 0.1:
         				self.landing_transition()
 
     def velocity_callback(self):
@@ -115,9 +115,8 @@ class BackyardFlyer(Drone):
         1. Return waypoints to fly a box
         """
         print("setting waypoints")
-        local_waypoints = [[10.0, 0.0, 3.0], [10.0, 10.0, 3.0], [0.0, 10.0, 3.0], [0.0, 0.0, 3.0]]
-
-        return local_waypoints
+        
+        return [[10.0, 0.0, 3.0], [10.0, 10.0, 3.0], [0.0, 10.0, 3.0], [0.0, 0.0, 3.0]]
 
     def arming_transition(self):
         """TODO: Fill out this method
@@ -160,7 +159,7 @@ class BackyardFlyer(Drone):
         print("waypoint transition")
         self.target_position = self.all_waypoints.pop(0)
         print("target_position", self.target_position)
-        self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2], 0.0)
+        self.cmd_position(*self.target_position, 0.0)
         self.flight_state = States.WAYPOINT
 
     def landing_transition(self):
