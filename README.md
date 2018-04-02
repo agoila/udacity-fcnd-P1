@@ -12,7 +12,7 @@ Follow the steps mentioned [here](https://github.com/agoila/udacity-fcnd-P1/blob
 
 Here's a plot of the data acquired after executing the code in `backyard_flyer.py`.
 
-![Visdom plot](https://github.com/agoila/udacity-fcnd-P1/blob/master/images/visdom.PNG "Position and Altitude plots")
+![Visdom plot](https://github.com/agoila/udacity-fcnd-P1/blob/master/images_readme/visdom.PNG "Position and Altitude plots")
 
 ## My Submission 
 You can find my submission [here](https://github.com/agoila/udacity-fcnd-P1/blob/master/backyard_flyer.py).
@@ -20,7 +20,7 @@ You can find my submission [here](https://github.com/agoila/udacity-fcnd-P1/blob
 ## Visualize Drone Trajectory
 Thanks to user [@fierval](https://github.com/fierval/fcnd/blob/master/backyard_flyer/Trajectory%20Visualization.ipynb) for the drone trajectory visualization code. Here's the square trajectory for my drone run:
 
-![Drone Trajectory](https://github.com/agoila/udacity-fcnd-P1/blob/master/images/drone_trajectory.PNG "Trajectory")
+![Drone Trajectory](https://github.com/agoila/udacity-fcnd-P1/blob/master/images_readme/drone_trajectory.PNG "Trajectory")
 
 
 
